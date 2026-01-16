@@ -3,11 +3,291 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="refresh" content="0; url=./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html" />
-  <title>Redirecting...</title>
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="AMianSleepy 的个人主页：项目作品、技能栈、文章与联系方式。" />
+  <meta name="author" content="AMianSleepy" />
+  <link rel="canonical" href="https://amiansleepy.me/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AMianSleepy · 个人主页" />
+  <meta property="og:description" content="项目作品、技能栈、文章与联系方式。" />
+  <meta property="og:url" content="https://amiansleepy.me/" />
+  <meta name="twitter:card" content="summary" />
+
+  <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f7f8ff" media="(prefers-color-scheme: light)" />
+
+  <title>AMianSleepy · 个人主页</title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <script type="module" src="./assets/js/main.js"></script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "AMianSleepy",
+      "url": "https://amiansleepy.me/",
+      "sameAs": ["https://github.com/AMianSleepy"]
+    }
+  </script>
 </head>
 <body>
-  <p>Redirecting to dashboard…</p>
-  <a href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">Open Dashboard</a>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header" id="top">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="回到顶部">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span class="brand-title">AMianSleepy</span>
+            <span class="brand-sub">ASP.NET Core · TypeScript · 无框架前端</span>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="切换主题" aria-pressed="false" title="切换主题">
+            <span class="icon" aria-hidden="true">◐</span>
+          </button>
+
+          <button class="icon-btn menu-btn" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="打开菜单">
+            <span class="icon" aria-hidden="true">☰</span>
+          </button>
+        </div>
+
+        <nav class="nav" id="primary-nav" aria-label="主导航">
+          <a href="#projects">作品集</a>
+          <a href="#skills">技能</a>
+          <a href="#blog">文章</a>
+          <a href="#contact">联系</a>
+          <a class="nav-cta" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">渐进增强 · 关注点分离 · 性能优先</p>
+            <h1 class="hero-title" id="hero-title">一个可扩展的个人展示页面（从静态开始）</h1>
+            <p class="hero-lead">
+              这个站点使用纯 HTML/CSS/TypeScript（无前端框架），并预留可无缝扩展到 ASP.NET Core Minimal API / MVC 的后端接口。
+              现在是展示页，后续可以自然升级为完整应用。
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#projects">查看作品</a>
+              <a class="btn" href="#contact">联系我</a>
+              <a class="btn ghost" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">打开：炫酷仪表盘</a>
+            </div>
+
+            <ul class="meta-row" aria-label="关键能力">
+              <li>模块化结构</li>
+              <li>强类型保障</li>
+              <li>接口驱动演进</li>
+            </ul>
+          </div>
+
+          <div class="hero-card" aria-label="个人信息卡片">
+            <div class="hero-card-top">
+              <div class="avatar" aria-hidden="true"></div>
+              <div class="hero-card-text">
+                <p class="name">AMianSleepy</p>
+                <p class="role">全栈架构 / 工程化实践</p>
+              </div>
+            </div>
+
+            <dl class="facts">
+              <div>
+                <dt>前端</dt>
+                <dd>HTML/CSS/TS · 组件化 · 移动端优先</dd>
+              </div>
+              <div>
+                <dt>后端</dt>
+                <dd>ASP.NET Core · Minimal API / MVC</dd>
+              </div>
+              <div>
+                <dt>方向</dt>
+                <dd>可维护 · 可扩展 · 从第一天考虑性能</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="projects-title">项目作品集</h2>
+          <p class="section-desc">展示一些代表性的实现与实验（可逐步接入后端数据）。</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3 class="card-title">炫酷仪表盘（UI 实验）</h3>
+            <p class="card-desc">玻璃拟态 + 动效，适合作为管理台 UI 原型。</p>
+            <div class="tag-row" aria-label="标签">
+              <span class="tag">HTML</span><span class="tag">CSS</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">打开页面</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">个人站点骨架（当前）</h3>
+            <p class="card-desc">无框架前端 + TS 模块化；后端可用 Minimal API 扩展。</p>
+            <div class="tag-row" aria-label="标签">
+              <span class="tag">TypeScript</span><span class="tag">SEO</span><span class="tag">Minimal API</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="#skills">查看技能</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">即将上线</h3>
+            <p class="card-desc">更多项目持续补充；后续可由 API 驱动渲染。</p>
+            <div class="tag-row" aria-label="标签">
+              <span class="tag">Roadmap</span>
+            </div>
+            <div class="card-actions">
+              <a class="link" href="#contact">合作/交流</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="skills-title">技能展示</h2>
+          <p class="section-desc">围绕“可扩展性”组织能力：结构清晰、边界明确、易协作。</p>
+        </div>
+
+        <div class="grid cols-2">
+          <article class="panel">
+            <h3 class="panel-title">后端（C# / ASP.NET Core）</h3>
+            <ul class="list">
+              <li>Minimal API / MVC：从轻到重平滑演进</li>
+              <li>清晰分层：Core / Infrastructure / Web</li>
+              <li>OpenAPI、健康检查、可观测性扩展点</li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <h3 class="panel-title">前端（无框架）</h3>
+            <ul class="list">
+              <li>原生模块 + TS 类型：组件化组织</li>
+              <li>移动端优先 + 可访问性（ARIA/键盘）</li>
+              <li>渐进增强：JS 不可用也能浏览</li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <h3 class="panel-title">性能优化</h3>
+            <ul class="list">
+              <li>系统字体与轻资源；减少布局抖动</li>
+              <li>交互按需加载；避免大包依赖</li>
+              <li>基础 SEO：语义化结构与结构化数据</li>
+            </ul>
+          </article>
+
+          <article class="panel">
+            <h3 class="panel-title">工程化</h3>
+            <ul class="list">
+              <li>TS 构建可选：先快跑，再逐步完善</li>
+              <li>稳定的接口契约，便于前后端并行</li>
+              <li>目录结构清晰，适合团队协作</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="blog-title">博客 / 文章</h2>
+          <p class="section-desc">先放占位卡片，后续可接入 Markdown 或 API 列表。</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3 class="card-title">渐进增强：从静态到 API 驱动</h3>
+            <p class="card-desc">如何引入后端而不推翻前端结构。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 架构</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">无框架组件化：用 TS 组织 UI</h3>
+            <p class="card-desc">原生模块、明确边界、易维护。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 前端</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">性能清单：从第一天开始</h3>
+            <p class="card-desc">少依赖、少阻塞、可访问性与 SEO。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 性能</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="contact-title">联系表单</h2>
+          <p class="section-desc">默认静态；若后端可用将自动 POST 到 API。</p>
+        </div>
+
+        <div class="contact">
+          <form class="contact-form" data-contact-form>
+            <div class="field">
+              <label for="name">称呼</label>
+              <input id="name" name="name" autocomplete="name" required maxlength="60" />
+            </div>
+            <div class="field">
+              <label for="email">邮箱</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="message">内容</label>
+              <textarea id="message" name="message" rows="5" required maxlength="1200"></textarea>
+            </div>
+
+            <div class="form-row">
+              <button class="btn primary" type="submit">发送</button>
+              <a class="btn" href="mailto:hello@amiansleepy.me">邮件联系</a>
+              <p class="form-hint" data-form-hint aria-live="polite"></p>
+            </div>
+          </form>
+
+          <aside class="contact-aside" aria-label="联系方式">
+            <div class="panel">
+              <h3 class="panel-title">快速链接</h3>
+              <ul class="list">
+                <li><a class="link" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li><a class="link" href="#projects">作品集</a></li>
+                <li><a class="link" href="#blog">文章</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="muted">© <span data-year></span> AMianSleepy. Built with HTML/CSS/TypeScript.</p>
+        <a class="link" href="#top">回到顶部</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
