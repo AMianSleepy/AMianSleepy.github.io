@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://amiansleepy.me/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AMianSleepy · 个人主页" />
+  <meta property="og:title" content="AMianSleepy" />
   <meta property="og:description" content="项目作品、技能栈、文章与联系方式。" />
   <meta property="og:url" content="https://amiansleepy.me/" />
   <meta name="twitter:card" content="summary" />
@@ -17,9 +17,10 @@
   <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#f7f8ff" media="(prefers-color-scheme: light)" />
 
-  <title>AMianSleepy · 个人主页</title>
+  <title>AMianSleepy</title>
   <link rel="stylesheet" href="./assets/css/main.css" />
-  <script type="module" src="./assets/js/main.js"></script>
+  <link rel="stylesheet" href="./assets/css/journey.css" />
+  <script type="module" src="./assets/js/main.js"></link>
 
   <script type="application/ld+json">
     {
@@ -31,36 +32,49 @@
     }
   </script>
 </head>
-<body>
+<body id="top">
+  <div class="bg-fx" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
   <a class="skip-link" href="#main">跳到主要内容</a>
 
-  <header class="site-header" id="top">
+  <header class="site-header">
     <div class="container">
       <div class="header-inner">
         <a class="brand" href="#top" aria-label="回到顶部">
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-text">
             <span class="brand-title">AMianSleepy</span>
-            <span class="brand-sub">ASP.NET Core · TypeScript · 无框架前端</span>
+            <span class="brand-sub">Front-end &amp; .NET Engineer</span>
           </span>
         </a>
 
         <div class="header-actions">
           <button class="icon-btn" type="button" data-theme-toggle aria-label="切换主题" aria-pressed="false" title="切换主题">
-            <span class="icon" aria-hidden="true">◐</span>
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </span>
           </button>
 
           <button class="icon-btn menu-btn" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="打开菜单">
-            <span class="icon" aria-hidden="true">☰</span>
+             <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+             </span>
           </button>
         </div>
 
         <nav class="nav" id="primary-nav" aria-label="主导航">
-          <a href="#projects">作品集</a>
+          <a href="./resume.html">简历</a>
+          <a href="#projects">作品</a>
           <a href="#skills">技能</a>
           <a href="#blog">文章</a>
           <a href="#contact">联系</a>
-          <a class="nav-cta" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="nav-cta" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
         </nav>
       </div>
     </div>
@@ -70,93 +84,169 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">渐进增强 · 关注点分离 · 性能优先</p>
-            <h1 class="hero-title" id="hero-title">一个可扩展的个人展示页面（从静态开始）</h1>
+          <div class="hero-content fade-in-up">
+            <div class="chip-label">Available for hire</div>
+            <h1 class="hero-title" id="hero-title">
+              构建<span class="text-gradient">高性能</span>且<br>
+              <span class="text-gradient">令人愉悦</span>的数字体验
+            </h1>
             <p class="hero-lead">
-              这个站点使用纯 HTML/CSS/TypeScript（无前端框架），并预留可无缝扩展到 ASP.NET Core Minimal API / MVC 的后端接口。
-              现在是展示页，后续可以自然升级为完整应用。
+              我是 AMianSleepy，一名全栈开发者。专注于打造极致的用户界面与稳健的后端服务。
+              现有站点基于纯 HTML/CSS/TS 构建，保持轻量，随时准备接入 ASP.NET Core。
             </p>
 
             <div class="cta-row">
-              <a class="btn primary" href="#projects">查看作品</a>
-              <a class="btn" href="#contact">联系我</a>
-              <a class="btn ghost" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">打开：炫酷仪表盘</a>
+              <a class="btn primary glow" href="#projects">浏览作品</a>
+              <a class="btn ghost" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">
+                <span>实验室：炫酷仪表盘</span>
+              </a>
             </div>
 
-            <ul class="meta-row" aria-label="关键能力">
-              <li>模块化结构</li>
-              <li>强类型保障</li>
-              <li>接口驱动演进</li>
-            </ul>
-          </div>
-
-          <div class="hero-card" aria-label="个人信息卡片">
-            <div class="hero-card-top">
-              <div class="avatar" aria-hidden="true"></div>
-              <div class="hero-card-text">
-                <p class="name">AMianSleepy</p>
-                <p class="role">全栈架构 / 工程化实践</p>
-              </div>
-            </div>
-
-            <dl class="facts">
+            <dl class="hero-stats">
               <div>
-                <dt>前端</dt>
-                <dd>HTML/CSS/TS · 组件化 · 移动端优先</dd>
+                <dt>TypeScript</dt>
+                <dd>Interactive</dd>
               </div>
+              <div class="sep"></div>
               <div>
-                <dt>后端</dt>
-                <dd>ASP.NET Core · Minimal API / MVC</dd>
+                <dt>.NET 8</dt>
+                <dd>Ready</dd>
               </div>
+              <div class="sep"></div>
               <div>
-                <dt>方向</dt>
-                <dd>可维护 · 可扩展 · 从第一天考虑性能</dd>
+                <dt>Performance</dt>
+                <dd>Optimized</dd>
               </div>
             </dl>
+          </div>
+
+          <div class="hero-visual fade-in-up delay-1">
+             <div class="glass-card">
+               <div class="card-glow"></div>
+               <div class="card-inner">
+                 <div class="code-preview">
+                   <div class="code-header">
+                     <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                   </div>
+                   <pre><code><span class="k">interface</span> <span class="t">Developer</span> {
+  <span class="p">name</span>: <span class="s">"AMianSleepy"</span>;
+  <span class="p">stack</span>: [<span class="s">"React"</span>, <span class="s">".NET"</span>, <span class="s">"Vue"</span>];
+  <span class="p">passion</span>: <span class="k">true</span>;
+}
+
+<span class="k">const</span> <span class="f">createValue</span> = () => {
+   <span class="k">return</span> <span class="k">new</span> <span class="t">Future</span>();
+};</code></pre>
+                 </div>
+                 <div class="card-badge">
+                   <span class="avatar-ph">AS</span>
+                   <div>
+                      <b>AMianSleepy</b>
+                      <small>Full Stack Dev</small>
+                   </div>
+                 </div>
+               </div>
+             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- 旅程展示区 (Journey Teaser) -->
+    <section class="section-journey fade-in-up delay-2">
+      <div class="container">
+        <div class="journey-card">
+          <div class="journey-visual" id="journey-visual">
+             <iframe 
+                id="journey-frame"
+                src="./csharp-journey.html" 
+                title="C# Journey Animation"
+                loading="lazy"
+                scrolling="no">
+             </iframe>
+             <div class="visual-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 自动播放脚本 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const frame = document.getElementById('journey-frame');
+        const visualContainer = document.getElementById('journey-visual');
+        
+        // 使用 IntersectionObserver 监听元素是否进入视图
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // 进入视图，发送播放指令
+              // 延时一点点，确保 iframe 加载完成且用户定睛
+              setTimeout(() => {
+                if(frame && frame.contentWindow) {
+                  frame.contentWindow.postMessage('play', '*');
+                  visualContainer.classList.add('playing');
+                }
+              }, 500);
+              
+              // 播放后断开观察，避免重复触发（除非希望每次滚回来都重播，暂不推荐）
+              observer.disconnect();
+            }
+          });
+        }, {
+          threshold: 0.5 // 至少 50% 可见时触发
+        });
+
+        if (visualContainer) {
+          observer.observe(visualContainer);
+        }
+      });
+    </script>
+
     <section class="section" id="projects" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title" id="projects-title">项目作品集</h2>
-          <p class="section-desc">展示一些代表性的实现与实验（可逐步接入后端数据）。</p>
+        <div class="section-head reveal">
+          <h2 class="section-title" id="projects-title">精选作品</h2>
+          <p class="section-desc">将设计与工程结合，创造有价值的工具。</p>
         </div>
 
-        <div class="grid cards">
-          <article class="card">
-            <h3 class="card-title">炫酷仪表盘（UI 实验）</h3>
-            <p class="card-desc">玻璃拟态 + 动效，适合作为管理台 UI 原型。</p>
-            <div class="tag-row" aria-label="标签">
-              <span class="tag">HTML</span><span class="tag">CSS</span>
+        <div class="grid projects-grid">
+          <article class="project-card reveal delay-1">
+            <div class="project-media gradient-1">
+              <div class="project-icon">🎨</div>
             </div>
-            <div class="card-actions">
-              <a class="link" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">打开页面</a>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3 class="card-title">个人站点骨架（当前）</h3>
-            <p class="card-desc">无框架前端 + TS 模块化；后端可用 Minimal API 扩展。</p>
-            <div class="tag-row" aria-label="标签">
-              <span class="tag">TypeScript</span><span class="tag">SEO</span><span class="tag">Minimal API</span>
-            </div>
-            <div class="card-actions">
-              <a class="link" href="#skills">查看技能</a>
+            <div class="project-body">
+              <h3 class="card-title"><a href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html" class="full-link">炫酷仪表盘 UI</a></h3>
+              <p class="card-desc">探索玻璃拟态与复杂数据可视化的前端实现。纯 CSS 动效，无 JS 库依赖。</p>
+              <div class="tag-row">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Animation</span>
+              </div>
             </div>
           </article>
 
-          <article class="card">
-            <h3 class="card-title">即将上线</h3>
-            <p class="card-desc">更多项目持续补充；后续可由 API 驱动渲染。</p>
-            <div class="tag-row" aria-label="标签">
-              <span class="tag">Roadmap</span>
+          <article class="project-card reveal delay-2">
+            <div class="project-media gradient-2">
+               <div class="project-icon">⚡</div>
             </div>
-            <div class="card-actions">
-              <a class="link" href="#contact">合作/交流</a>
+            <div class="project-body">
+              <h3 class="card-title">个人站点架构</h3>
+              <p class="card-desc">当前站点源码。展示了如何用原生 Web 技术构建现代化、高性能的静态页面。</p>
+              <div class="tag-row">
+                <span class="tag">TypeScript</span><span class="tag">Semantics</span><span class="tag">A11y</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-3">
+            <div class="project-media gradient-3">
+               <div class="project-icon">🛠️</div>
+            </div>
+            <div class="project-body">
+              <h3 class="card-title">Minimal API 模板</h3>
+              <p class="card-desc">为后端准备的 ASP.NET Core 9.0 快速启动模板，集成 OpenAPI 与 JWT。</p>
+              <div class="tag-row">
+                <span class="tag">C#</span><span class="tag">.NET 9</span><span class="tag">Backend</span>
+              </div>
             </div>
           </article>
         </div>
@@ -165,46 +255,42 @@
 
     <section class="section" id="skills" aria-labelledby="skills-title">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title" id="skills-title">技能展示</h2>
-          <p class="section-desc">围绕“可扩展性”组织能力：结构清晰、边界明确、易协作。</p>
+        <div class="section-head reveal">
+          <h2 class="section-title" id="skills-title">技术栈</h2>
+          <p class="section-desc">全栈开发能力，保持对新技术的敏锐度。</p>
         </div>
 
-        <div class="grid cols-2">
-          <article class="panel">
-            <h3 class="panel-title">后端（C# / ASP.NET Core）</h3>
-            <ul class="list">
-              <li>Minimal API / MVC：从轻到重平滑演进</li>
-              <li>清晰分层：Core / Infrastructure / Web</li>
-              <li>OpenAPI、健康检查、可观测性扩展点</li>
-            </ul>
+        <div class="skills-layout">
+          <article class="panel reveal delay-1">
+            <div class="panel-head">
+               <div class="icon-box">💻</div>
+               <h3 class="panel-title">前端工程</h3>
+            </div>
+            <div class="chip-container">
+              <span class="chip">TypeScript</span>
+              <span class="chip">React</span>
+              <span class="chip">Vue.js</span>
+              <span class="chip">Tailwind CSS</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Vite</span>
+              <span class="chip">Three.js</span>
+            </div>
           </article>
 
-          <article class="panel">
-            <h3 class="panel-title">前端（无框架）</h3>
-            <ul class="list">
-              <li>原生模块 + TS 类型：组件化组织</li>
-              <li>移动端优先 + 可访问性（ARIA/键盘）</li>
-              <li>渐进增强：JS 不可用也能浏览</li>
-            </ul>
-          </article>
-
-          <article class="panel">
-            <h3 class="panel-title">性能优化</h3>
-            <ul class="list">
-              <li>系统字体与轻资源；减少布局抖动</li>
-              <li>交互按需加载；避免大包依赖</li>
-              <li>基础 SEO：语义化结构与结构化数据</li>
-            </ul>
-          </article>
-
-          <article class="panel">
-            <h3 class="panel-title">工程化</h3>
-            <ul class="list">
-              <li>TS 构建可选：先快跑，再逐步完善</li>
-              <li>稳定的接口契约，便于前后端并行</li>
-              <li>目录结构清晰，适合团队协作</li>
-            </ul>
+          <article class="panel reveal delay-2">
+            <div class="panel-head">
+               <div class="icon-box">⚙️</div>
+               <h3 class="panel-title">后端服务</h3>
+            </div>
+            <div class="chip-container">
+              <span class="chip">C# / .NET Core</span>
+              <span class="chip">ASP.NET WebAPI</span>
+              <span class="chip">Entity Framework</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Redis</span>
+              <span class="chip">Docker</span>
+              <span class="chip">RabbitMQ</span>
+            </div>
           </article>
         </div>
       </div>

@@ -12,20 +12,17 @@ function setTheme(theme) {
 function getStoredTheme() {
   try {
     const raw = localStorage.getItem(THEME_STORAGE_KEY);
-    if (raw === "light" || raw === "dark") return raw;
+    return raw === "light" || raw === "dark" ? raw : null;
   } catch {
-    // ignore
+    return null;
   }
-  return null;
 }
 
 function getSystemTheme() {
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
-function initThemeToggle() {
+export function initThemeToggle() {
   const btn = document.querySelector("[data-theme-toggle]");
   if (!(btn instanceof HTMLButtonElement)) return;
 
@@ -41,7 +38,7 @@ function initThemeToggle() {
   });
 }
 
-function initNavToggle() {
+export function initNavToggle() {
   const header = document.querySelector(".site-header");
   const btn = document.querySelector("[data-nav-toggle]");
   const nav = document.getElementById("primary-nav");
@@ -70,9 +67,7 @@ function initNavToggle() {
 
   nav.addEventListener("click", (ev) => {
     const target = ev.target;
-    if (target instanceof HTMLAnchorElement && target.getAttribute("href")?.startsWith("#")) {
-      close();
-    }
+    if (target instanceof HTMLAnchorElement && target.getAttribute("href")?.startsWith("#")) close();
   });
 
   document.addEventListener("keydown", (ev) => {
@@ -86,7 +81,7 @@ function initNavToggle() {
   });
 }
 
-function initYear() {
+export function initYear() {
   const el = document.querySelector("[data-year]");
   if (el) el.textContent = String(new Date().getFullYear());
 }
@@ -104,13 +99,13 @@ async function tryPostContact(payload) {
   }
 }
 
-function buildMailto({ name, email, message }) {
-  const subject = encodeURIComponent(`来自个人主页的联系：${name}`);
-  const body = encodeURIComponent(`称呼：${name}\n邮箱：${email}\n\n${message}`);
+function buildMailto(payload) {
+  const subject = encodeURIComponent(`来自个人主页的联系：${payload.name}`);
+  const body = encodeURIComponent(`称呼：${payload.name}\n邮箱：${payload.email}\n\n${payload.message}`);
   return `mailto:hello@amiansleepy.me?subject=${subject}&body=${body}`;
 }
 
-function initContactForm() {
+export function initContactForm() {
   const form = document.querySelector("[data-contact-form]");
   const hint = document.querySelector("[data-form-hint]");
   if (!(form instanceof HTMLFormElement)) return;
@@ -120,11 +115,13 @@ function initContactForm() {
     ev.preventDefault();
 
     const fd = new FormData(form);
-    const name = String(fd.get("name") ?? "").trim();
-    const email = String(fd.get("email") ?? "").trim();
-    const message = String(fd.get("message") ?? "").trim();
+    const payload = {
+      name: String(fd.get("name") ?? "").trim(),
+      email: String(fd.get("email") ?? "").trim(),
+      message: String(fd.get("message") ?? "").trim()
+    };
 
-    if (!name || !email || !message) {
+    if (!payload.name || !payload.email || !payload.message) {
       hint.textContent = "请完整填写后再发送。";
       return;
     }
@@ -132,16 +129,31 @@ function initContactForm() {
     hint.textContent = "正在发送…";
 
     try {
-      await tryPostContact({ name, email, message });
+      await tryPostContact(payload);
       hint.textContent = "已提交成功（后端已接收）。";
       form.reset();
-      return;
     } catch {
-      // 无后端时：退化为 mailto
-      const url = buildMailto({ name, email, message });
       hint.textContent = "未检测到后端服务，已为你打开邮件客户端继续发送。";
-      window.location.href = url;
+      window.location.href = buildMailto(payload);
     }
+  });
+}
+
+export function initScrollReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  });
+
+  document.querySelectorAll(".reveal").forEach((el) => {
+    observer.observe(el);
   });
 }
 
@@ -149,3 +161,4 @@ initThemeToggle();
 initNavToggle();
 initYear();
 initContactForm();
+initScrollReveal();

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Journey of a C# Developer</title>
+    <style>
+        /* --- 全局设置 --- */
+        :root {
+            --bg-color: #f3f4f6;
+            --accent-purple: #68217A; /* .NET Purple */
+            --accent-blue: #0078d7;
+            --accent-green: #107c10;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --code-bg: #ffffff;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-code: 'Consolas', 'Fira Code', monospace;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--bg-color);
+            font-family: var(--font-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- 影院模式容器 --- */
+        #cinema-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1920px;
+            max-height: 1080px;
+            position: relative;
+            background: #ffffff;
+            box-shadow: 0 0 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* --- 舞台区域 --- */
+        #stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 85%; /* 留出底部给字幕 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        /* --- 字幕区域 --- */
+        #subtitle-area {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 15%;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 0 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .subtitle-cn {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease-out;
+        }
+
+        .subtitle-en {
+            font-size: 1.2rem;
+            color: var(--text-sub);
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease-out 0.1s;
+        }
+
+        .subtitle-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- 进度条 --- */
+        #progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-purple);
+            width: 0%;
+            z-index: 20;
+            transition: width 0.1s linear;
+        }
+
+        /* --- 场景元素通用样式 --- */
+        .scene-element {
+            position: absolute;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* C# Logo */
+        .csharp-logo {
+            width: 120px;
+            height: 120px;
+            background: var(--accent-purple);
+            color: white;
+            font-weight: bold;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px; /* Hexagon-ish look via masking usually, but rounded box is clean */
+            box-shadow: 0 10px 30px rgba(104, 33, 122, 0.3);
+            z-index: 5;
+        }
+        
+        /* 代码编辑器窗口 */
+        .code-window {
+            width: 600px;
+            background: var(--code-bg);
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            font-family: var(--font-code);
+            font-size: 18px;
+            border: 1px solid #e1e4e8;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        .window-header {
+            background: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            gap: 6px;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .code-content {
+            padding: 20px;
+            color: #24292e;
+            line-height: 1.6;
+        }
+        .keyword { color: #d73a49; }
+        .string { color: #032f62; }
+        .class-name { color: #6f42c1; }
+        .method { color: #005cc5; }
+
+        /* 抽象图形 */
+        .box {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 2px solid var(--accent-blue);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: var(--accent-blue);
+            box-shadow: 0 4px 10px rgba(0,120,215,0.2);
+        }
+
+        /* 粒子流 */
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        /* 云/服务器 */
+        .cloud-icon {
+            font-size: 80px;
+            color: var(--accent-blue);
+            opacity: 0.8;
+        }
+
+        /* 连线 Canvas */
+        #connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* 动画关键帧类 */
+        .fade-in { opacity: 1 !important; transform: scale(1) translateY(0) !important; }
+        .fade-out { opacity: 0 !important; transform: scale(1.1) translateY(-20px) !important; }
+        .slide-up { transform: translateY(-50px); opacity: 0; }
+
+        /* Blink cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: black;
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- Manual Replay Button (Corner) --- */
+        #manual-replay {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 110;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            backdrop-filter: blur(8px);
+            color: var(--text-sub);
+            outline: none;
+        }
+
+        #cinema-container:hover #manual-replay {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #manual-replay:hover {
+            background: #fff !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            color: var(--accent-purple);
+            transform: scale(1.1) rotate(-180deg) !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="cinema-container">
+        <canvas id="connections"></canvas>
+        <div id="stage">
+            <!-- 动态内容将通过 JS 注入这里 -->
+        </div>
+
+        <!-- 角落重播 (Corner) -->
+        <button id="manual-replay" onclick="startMovie()" aria-label="Replay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+            </svg>
+        </button>
+
+        <div id="subtitle-area">
+            <div class="subtitle-cn" id="sub-cn"></div>
+            <div class="subtitle-en" id="sub-en"></div>
+        </div>
+        <div id="progress-bar"></div>
+    </div>
+
+    <script>
+        // --- 导演系统 (Director System) ---
+        
+        // 使用 let 以便在重播时替换 DOM 节点
+        let stage = document.getElementById('stage');
+        const subCn = document.getElementById('sub-cn');
+        const subEn = document.getElementById('sub-en');
+        const progressBar = document.getElementById('progress-bar');
+        let canvas = document.getElementById('connections');
+        let ctx = canvas.getContext('2d');
+
+        // 调整 Canvas 尺寸
+        function resizeCanvas() {
+            canvas.width = document.getElementById('cinema-container').offsetWidth;
+            canvas.height = document.getElementById('cinema-container').offsetHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // 场景配置
+        const scenes = [
+            {
+                id: 'intro',
+                duration: 4000,
+                cn: "C# 程序员的成长之路",
+                en: "The Evolution of a C# Programmer",
+                setup: setupIntro
+            },
+            {
+                id: 'novice',
+                duration: 6000,
+                cn: "起点：Hello World 与基础语法",
+                en: "The Beginning: Hello World & Basic Syntax",
+                setup: setupNovice
+            },
+            {
+                id: 'oop',
+                duration: 7000,
+                cn: "进阶：面向对象，将现实抽象为代码",
+                en: "Level Up: OOP, Abstracting Reality into Code",
+                setup: setupOOP
+            },
+            {
+                id: 'ecosystem',
+                duration: 7000,
+                cn: "生态：LINQ、异步与 NuGet 包管理",
+                en: "The Ecosystem: LINQ, Async & NuGet",
+                setup: setupEcosystem
+            },
+            {
+                id: 'architecture',
+                duration: 7000,
+                cn: "大师：微服务、云原生与架构设计",
+                en: "Mastery: Microservices, Cloud Native & Architecture",
+                setup: setupArchitecture
+            },
+            {
+                id: 'outro',
+                duration: 5000,
+                cn: "旅程从未结束，保持好奇",
+                en: "The journey never ends. Stay curious.",
+                setup: setupOutro
+            }
+        ];
+
+        let currentSceneIndex = 0;
+        let totalDuration = scenes.reduce((acc, cur) => acc + cur.duration, 0);
+        let movieStartTime = null; 
+        let nextSceneTimeout = null; // 用于追踪场景切换定时器
+
+        // --- 播放控制 ---
+
+        function startMovie() {
+            // 1. 清理上一轮的定时器
+            if (nextSceneTimeout) clearTimeout(nextSceneTimeout);
+
+            // 2. 暴力清理：克隆并替换 DOM 节点，切断旧逻辑的引用
+            const newStage = stage.cloneNode(false);
+            stage.parentNode.replaceChild(newStage, stage);
+            stage = newStage;
+
+            const newCanvas = canvas.cloneNode(false);
+            canvas.parentNode.replaceChild(newCanvas, canvas);
+            canvas = newCanvas;
+            ctx = canvas.getContext('2d');
+            
+            // 重新绑定 resize (虽然 resize 是 window 事件，但 newCanvas 需要尺寸设置)
+            resizeCanvas();
+
+            // 3. 重置状态
+            movieStartTime = Date.now();
+            updateProgressBar();
+            playScene(0);
+        }
+
+        function playScene(index) {
+            if (index >= scenes.length) {
+                progressBar.style.width = '100%';
+                return;
+            }
+
+            const scene = scenes[index];
+            currentSceneIndex = index;
+
+            // 1. 清理舞台
+            stage.innerHTML = '';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 2. 设置字幕
+            updateSubtitles(scene.cn, scene.en);
+
+            // 3. 执行场景特定的视觉设置 (传入当前的 stage 和 ctx 引用)
+            scene.setup(stage, ctx);
+
+            // 4. 调度下一个场景
+            nextSceneTimeout = setTimeout(() => {
+                playScene(index + 1);
+            }, scene.duration);
+        }
+
+        function updateSubtitles(cn, en) {
+            subCn.classList.remove('subtitle-active');
+            subEn.classList.remove('subtitle-active');
+            
+            setTimeout(() => {
+                subCn.innerText = cn;
+                subEn.innerText = en;
+                subCn.classList.add('subtitle-active');
+                subEn.classList.add('subtitle-active');
+            }, 500);
+        }
+
+        // --- 进度条优化版本 ---
+        function updateProgressBar() {
+            if (!movieStartTime) return;
+            
+            const now = Date.now();
+            const elapsed = now - movieStartTime;
+            let pct = (elapsed / totalDuration) * 100;
+            
+            if (pct > 100) pct = 100;
+            
+            progressBar.style.width = pct + "%";
+
+            // 如果电影还没结束，继续更新进度条
+            if (pct < 100) {
+                requestAnimationFrame(updateProgressBar);
+            } else {
+                progressBar.style.width = '100%'; // 最终确保到100%
+            }
+        }
+
+        // --- 场景构建函数 ---
+        // 注意：由于 startMovie 中我们将 stage 变量重新赋值为了新节点，
+        // 我们必须确保 global 作用域的 stage 变量是 let 而不是 const
+        // (在头部声明修改)
+
+        // 场景 1: Intro
+        function setupIntro(stage, ctx) {
+            const logo = document.createElement('div');
+            logo.className = 'csharp-logo';
+            logo.innerText = 'C#';
+            logo.style.transform = 'scale(0) rotate(-180deg)';
+            logo.style.transition = 'transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            
+            stage.appendChild(logo);
+
+            setTimeout(() => {
+                logo.style.transform = 'scale(1.5) rotate(0deg)';
+            }, 100);
+        }
+
+        // 场景 2: Novice (Console)
+        function setupNovice(stage, ctx) {
+            const codeWin = document.createElement('div');
+            codeWin.className = 'code-window';
+            codeWin.innerHTML = `
+                <div class="window-header">
+                    <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                </div>
+                <div class="code-content" id="typewriter"></div>
+            `;
+            stage.appendChild(codeWin);
+
+            // 动画进入
+            setTimeout(() => codeWin.classList.add('fade-in'), 50);
+
+            // 打字机效果
+            const textToType = `Console.<span class="method">WriteLine</span>(<span class="string">"Hello World"</span>);<br><span class="keyword">int</span> age = 25;<br><span class="keyword">if</span> (isReady) {<br>&nbsp;&nbsp;StartJourney();<br>}`;
+            const target = codeWin.querySelector('#typewriter');
+            let i = 0;
+            
+            // 模拟解析HTML标签的打字机有点复杂，这里简化处理：
+            // 直接一次性显示一部分，模拟思考停顿
+            setTimeout(() => { target.innerHTML = `<span class="class-name">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Hello World"</span>);<span class="cursor"></span>`; }, 1000);
+            setTimeout(() => { target.innerHTML = `<span class="class-name">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Hello World"</span>);<br><span class="keyword">int</span> age = 0;<span class="cursor"></span>`; }, 2500);
+            setTimeout(() => { target.innerHTML = `<span class="class-name">Console</span>.<span class="method">WriteLine</span>(<span class="string">"Hello World"</span>);<br><span class="keyword">int</span> age = 0;<br><span class="keyword">while</span>(true) { Learn(); }<span class="cursor"></span>`; }, 4000);
+        }
+
+        // 场景 3: OOP (Blueprints to Objects)
+        function setupOOP(stage, ctx) {
+            // 左侧：类（蓝图）
+            const blueprint = document.createElement('div');
+            blueprint.className = 'code-window';
+            blueprint.style.width = '250px';
+            blueprint.style.position = 'absolute';
+            blueprint.style.left = '20%';
+            blueprint.style.opacity = '0';
+            blueprint.innerHTML = `
+                <div class="window-header"><div class="dot"></div></div>
+                <div class="code-content" style="font-size:14px">
+                    <span class="keyword">public class</span> <span class="class-name">Hero</span> {<br>
+                    &nbsp;&nbsp;<span class="keyword">public int</span> Level;<br>
+                    }
+                </div>
+            `;
+            stage.appendChild(blueprint);
+
+            setTimeout(() => blueprint.classList.add('fade-in'), 100);
+
+            // 右侧：实例化对象
+            const positions = [
+                {x: '60%', y: '30%', delay: 1500},
+                {x: '70%', y: '50%', delay: 2500},
+                {x: '60%', y: '70%', delay: 3500}
+            ];
+
+            positions.forEach((pos, idx) => {
+                setTimeout(() => {
+                    const obj = document.createElement('div');
+                    obj.className = 'box';
+                    obj.innerText = `new Hero()`;
+                    obj.style.position = 'absolute';
+                    obj.style.left = '20%'; // Start at blueprint
+                    obj.style.top = '40%';
+                    obj.style.zIndex = 2;
+                    obj.style.opacity = 0;
+                    obj.style.backgroundColor = '#fff';
+                    stage.appendChild(obj);
+
+                    // Animate moving out
+                    requestAnimationFrame(() => {
+                        obj.style.transition = 'all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                        obj.style.opacity = 1;
+                        obj.style.left = pos.x;
+                        obj.style.top = pos.y;
+                    });
+
+                    // Draw line (simple simulation)
+                    drawConnection(
+                        ctx,
+                        {x: window.innerWidth * 0.2 + 125, y: window.innerHeight * 0.4}, 
+                        {x: window.innerWidth * (parseFloat(pos.x)/100), y: window.innerHeight * (parseFloat(pos.y)/100)}
+                    );
+
+                }, pos.delay);
+            });
+        }
+
+        function drawConnection(ctx, start, end) {
+            // 简单的 Canvas 连线动画
+            let progress = 0;
+            function animateLine() {
+                progress += 0.05;
+                if(progress > 1) progress = 1;
+                
+                ctx.beginPath();
+                ctx.moveTo(start.x, start.y);
+                ctx.lineTo(start.x + (end.x - start.x) * progress, start.y + (end.y - start.y) * progress);
+                ctx.strokeStyle = '#0078d7';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.stroke();
+
+                if(progress < 1) requestAnimationFrame(animateLine);
+            }
+            animateLine();
+        }
+
+
+        // 场景 4: Ecosystem (LINQ Stream)
+        function setupEcosystem(stage, ctx) {
+            // 视觉概念：数据流管道
+            const container = document.createElement('div');
+            container.style.width = '80%';
+            container.style.height = '100px';
+            container.style.display = 'flex';
+            container.style.justifyContent = 'space-between';
+            container.style.alignItems = 'center';
+            container.style.position = 'relative';
+            stage.appendChild(container);
+
+            // 代码提示
+            const label = document.createElement('div');
+            label.innerHTML = `data.<span class="method">Where</span>(x => x > 5).<span class="method">ToList</span>()`;
+            label.style.fontFamily = 'monospace';
+            label.style.fontSize = '24px';
+            label.style.position = 'absolute';
+            label.style.top = '-80px';
+            label.style.width = '100%';
+            label.style.textAlign = 'center';
+            label.className = 'fade-in';
+            container.appendChild(label);
+
+            // 生成粒子
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    const val = Math.floor(Math.random() * 10);
+                    p.innerText = val;
+                    p.style.display = 'flex';
+                    p.style.justifyContent = 'center';
+                    p.style.alignItems = 'center';
+                    p.style.color = 'white';
+                    p.style.fontSize = '8px';
+                    
+                    // 只有 > 5 的是绿色，其他是灰色
+                    if (val > 5) {
+                        p.style.backgroundColor = 'var(--accent-green)';
+                    } else {
+                        p.style.backgroundColor = '#ccc';
+                    }
+
+                    p.style.left = '0';
+                    p.style.top = '45px';
+                    container.appendChild(p);
+
+                    // 动画路径
+                    p.animate([
+                        { transform: 'translateX(0)', opacity: 0 },
+                        { transform: 'translateX(100px)', opacity: 1 },
+                        { transform: 'translateX(400px)', opacity: 1 }, // Filter zone
+                        { transform: `translateX(800px) translateY(${val > 5 ? 0 : 50}px)`, opacity: val > 5 ? 1 : 0 } // Filter effect
+                    ], {
+                        duration: 2000,
+                        easing: 'linear',
+                        fill: 'forwards'
+                    });
+
+                }, i * 200);
+            }
+        }
+
+        // 场景 5: Architecture (Microservices/Cloud)
+        function setupArchitecture(stage, ctx) {
+            // 中心：Load Balancer / Gateway
+            const centerNode = document.createElement('div');
+            centerNode.className = 'box';
+            centerNode.style.width = '100px';
+            centerNode.style.height = '100px';
+            centerNode.style.background = 'var(--accent-purple)';
+            centerNode.style.color = 'white';
+            centerNode.innerText = 'Gateway';
+            centerNode.style.borderRadius = '50%';
+            centerNode.style.zIndex = 10;
+            stage.appendChild(centerNode);
+
+            // 周围节点
+            const count = 6;
+            const radius = 200;
+            
+            for(let i=0; i<count; i++) {
+                setTimeout(() => {
+                    const angle = (i / count) * Math.PI * 2;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+
+                    const node = document.createElement('div');
+                    node.className = 'box';
+                    node.style.position = 'absolute';
+                    node.style.transform = `translate(${x}px, ${y}px)`;
+                    node.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6" y2="6"></line><line x1="6" y1="18" x2="6" y2="18"></line></svg>`;
+                    node.style.opacity = 0;
+                    
+                    stage.appendChild(node);
+                    
+                    // Fade in node
+                    requestAnimationFrame(() => {
+                        node.style.transition = 'opacity 0.5s';
+                        node.style.opacity = 1;
+                    });
+
+                    // Draw connection to center
+                    const centerX = window.innerWidth / 2;
+                    const centerY = (window.innerHeight * 0.85) / 2; // Adjust for stage height
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(centerX + x, centerY + y);
+                    ctx.strokeStyle = '#ddd';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Pulse effect
+                    const pulse = document.createElement('div');
+                    pulse.style.position = 'absolute';
+                    pulse.style.width = '10px';
+                    pulse.style.height = '10px';
+                    pulse.style.background = 'var(--accent-blue)';
+                    pulse.style.borderRadius = '50%';
+                    pulse.style.left = '50%'; // relative to stage center
+                    pulse.style.top = '50%';
+                    stage.appendChild(pulse);
+
+                    pulse.animate([
+                        { transform: `translate(-50%, -50%)` },
+                        { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }
+                    ], {
+                        duration: 1000,
+                        iterations: Infinity
+                    });
+
+                }, i * 500);
+            }
+        }
+
+        // 场景 6: Outro
+        function setupOutro(stage, ctx) {
+            const container = document.createElement('div');
+            container.style.textAlign = 'center';
+            
+            const title = document.createElement('h1');
+            title.innerText = ".NET";
+            title.style.fontSize = '80px';
+            title.style.color = 'var(--accent-purple)';
+            title.style.margin = '0';
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
+            title.style.transition = 'all 1s ease';
+
+            const sub = document.createElement('p');
+            sub.innerText = "Build Anything.";
+            sub.style.fontSize = '30px';
+            sub.style.color = '#555';
+            sub.style.opacity = '0';
+            sub.style.transition = 'all 1s ease 0.5s';
+
+            container.appendChild(title);
+            container.appendChild(sub);
+            stage.appendChild(container);
+
+            setTimeout(() => {
+                title.style.opacity = '1';
+                title.style.transform = 'translateY(0)';
+                sub.style.opacity = '1';
+            }, 100);
+        }
+
+        // --- 启动 ---
+        window.onload = startMovie;
+
+    </script>
+</body>
+</html>
