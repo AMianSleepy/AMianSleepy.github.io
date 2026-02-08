@@ -242,9 +242,16 @@
             backdrop-filter: blur(8px);
             color: var(--text-sub);
             outline: none;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         #cinema-container:hover #manual-replay {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #manual-replay.replay-visible {
             opacity: 1;
             transform: scale(1);
         }
@@ -254,6 +261,15 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             color: var(--accent-purple);
             transform: scale(1.1) rotate(-180deg) !important;
+        }
+
+        /* 优雅的点击反馈: 模拟物理按压效果 */
+        #manual-replay:active {
+            transform: scale(0.92) rotate(-180deg) !important;
+            background: #f0f0f5 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1), inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.05s ease-out, background 0.05s, box-shadow 0.05s;
+            color: var(--accent-purple);
         }
 
     </style>
@@ -291,6 +307,7 @@
         const progressBar = document.getElementById('progress-bar');
         let canvas = document.getElementById('connections');
         let ctx = canvas.getContext('2d');
+        const replayButton = document.getElementById('manual-replay');
 
         // 调整 Canvas 尺寸
         function resizeCanvas() {
@@ -354,6 +371,8 @@
         // --- 播放控制 ---
 
         function startMovie() {
+            if (replayButton) replayButton.classList.remove('replay-visible');
+
             // 1. 清理上一轮的定时器
             if (nextSceneTimeout) clearTimeout(nextSceneTimeout);
 
@@ -379,6 +398,7 @@
         function playScene(index) {
             if (index >= scenes.length) {
                 progressBar.style.width = '100%';
+                if (replayButton) replayButton.classList.add('replay-visible');
                 return;
             }
 
