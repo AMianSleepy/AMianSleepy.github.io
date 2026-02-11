@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmitOnError": true,
+    "outDir": "assets/js",
+    "rootDir": "assets/ts",
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "include": ["assets/ts/**/*.ts"]
+}

@@ -1,6 +1,14 @@
+export type Theme = "light" | "dark";
+
+export interface ContactPayload {
+  name: string;
+  email: string;
+  message: string;
+}
+
 const THEME_STORAGE_KEY = "theme";
 
-function setTheme(theme) {
+function setTheme(theme: Theme): void {
   document.documentElement.dataset.theme = theme;
   try {
     localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -9,7 +17,7 @@ function setTheme(theme) {
   }
 }
 
-function getStoredTheme() {
+function getStoredTheme(): Theme | null {
   try {
     const raw = localStorage.getItem(THEME_STORAGE_KEY);
     return raw === "light" || raw === "dark" ? raw : null;
@@ -18,11 +26,11 @@ function getStoredTheme() {
   }
 }
 
-function getSystemTheme() {
+function getSystemTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
-export function initThemeToggle() {
+export function initThemeToggle(): void {
   const btn = document.querySelector("[data-theme-toggle]");
   if (!(btn instanceof HTMLButtonElement)) return;
 
@@ -31,14 +39,14 @@ export function initThemeToggle() {
   btn.setAttribute("aria-pressed", initial === "light" ? "true" : "false");
 
   btn.addEventListener("click", () => {
-    const current = document.documentElement.dataset.theme === "light" ? "light" : "dark";
-    const next = current === "light" ? "dark" : "light";
+    const current: Theme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+    const next: Theme = current === "light" ? "dark" : "light";
     setTheme(next);
     btn.setAttribute("aria-pressed", next === "light" ? "true" : "false");
   });
 }
 
-export function initNavToggle() {
+export function initNavToggle(): void {
   const header = document.querySelector(".site-header");
   const btn = document.querySelector("[data-nav-toggle]");
   const nav = document.getElementById("primary-nav");
@@ -47,12 +55,12 @@ export function initNavToggle() {
   if (!(btn instanceof HTMLButtonElement)) return;
   if (!(nav instanceof HTMLElement)) return;
 
-  const close = () => {
+  const close = (): void => {
     header.dataset.navOpen = "false";
     btn.setAttribute("aria-expanded", "false");
   };
 
-  const open = () => {
+  const open = (): void => {
     header.dataset.navOpen = "true";
     btn.setAttribute("aria-expanded", "true");
   };
@@ -65,28 +73,28 @@ export function initNavToggle() {
     else open();
   });
 
-  nav.addEventListener("click", (ev) => {
+  nav.addEventListener("click", (ev: MouseEvent) => {
     const target = ev.target;
     if (target instanceof HTMLAnchorElement && target.getAttribute("href")?.startsWith("#")) close();
   });
 
-  document.addEventListener("keydown", (ev) => {
+  document.addEventListener("keydown", (ev: KeyboardEvent) => {
     if (ev.key === "Escape") close();
   });
 
-  document.addEventListener("click", (ev) => {
+  document.addEventListener("click", (ev: MouseEvent) => {
     const target = ev.target;
     if (!(target instanceof Node)) return;
     if (!header.contains(target)) close();
   });
 }
 
-export function initYear() {
+export function initYear(): void {
   const el = document.querySelector("[data-year]");
   if (el) el.textContent = String(new Date().getFullYear());
 }
 
-async function tryPostContact(payload) {
+async function tryPostContact(payload: ContactPayload): Promise<void> {
   const res = await fetch("/api/contact", {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -99,23 +107,23 @@ async function tryPostContact(payload) {
   }
 }
 
-function buildMailto(payload) {
+function buildMailto(payload: ContactPayload): string {
   const subject = encodeURIComponent(`来自个人主页的联系：${payload.name}`);
   const body = encodeURIComponent(`称呼：${payload.name}\n邮箱：${payload.email}\n\n${payload.message}`);
   return `mailto:hello@amiansleepy.me?subject=${subject}&body=${body}`;
 }
 
-export function initContactForm() {
+export function initContactForm(): void {
   const form = document.querySelector("[data-contact-form]");
   const hint = document.querySelector("[data-form-hint]");
   if (!(form instanceof HTMLFormElement)) return;
   if (!(hint instanceof HTMLElement)) return;
 
-  form.addEventListener("submit", async (ev) => {
+  form.addEventListener("submit", async (ev: SubmitEvent) => {
     ev.preventDefault();
 
     const fd = new FormData(form);
-    const payload = {
+    const payload: ContactPayload = {
       name: String(fd.get("name") ?? "").trim(),
       email: String(fd.get("email") ?? "").trim(),
       message: String(fd.get("message") ?? "").trim()
@@ -139,7 +147,8 @@ export function initContactForm() {
   });
 }
 
-export function initScrollReveal() {
+
+export function initScrollReveal(): void {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {

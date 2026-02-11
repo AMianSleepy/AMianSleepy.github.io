@@ -1,0 +1,7 @@
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.AssemblyInfoInputs.cache
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.AssemblyInfo.cs
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.csproj.CoreCompileInputs.cache
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Code\Git\repository\AMianSleepy.github.io\backend\PersonalSite.Api\obj\Debug\net8.0\PersonalSite.Api.sourcelink.json

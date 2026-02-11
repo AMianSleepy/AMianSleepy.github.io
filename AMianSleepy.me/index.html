@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <!-- 强制桌面视图：设定固定宽度为 1280px，禁用设备宽度自适应，使移动端渲染出缩小的桌面版网页 -->
+  <meta name="viewport" content="width=1280" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="description" content="AMianSleepy 的个人主页：项目作品、技能栈、文章与联系方式。" />
+  <meta name="author" content="AMianSleepy" />
+  <link rel="canonical" href="https://amiansleepy.me/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="AMianSleepy" />
+  <meta property="og:description" content="项目作品、技能栈、文章与联系方式。" />
+  <meta property="og:url" content="https://amiansleepy.me/" />
+  <meta name="twitter:card" content="summary" />
+
+  <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f7f8ff" media="(prefers-color-scheme: light)" />
+
+  <title>AMianSleepy</title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/journey.css" />
+  <script type="module" src="./assets/js/main.js"></link>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "AMianSleepy",
+      "url": "https://amiansleepy.me/",
+      "sameAs": ["https://github.com/AMianSleepy"]
+    }
+  </script>
+</head>
+<body id="top">
+  <div class="bg-fx" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <a class="brand" href="#top" aria-label="回到顶部">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">
+            <span class="brand-title">AMianSleepy</span>
+            <span class="brand-sub">Front-end &amp; .NET Engineer</span>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <button class="icon-btn" type="button" data-theme-toggle aria-label="切换主题" aria-pressed="false" title="切换主题">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </span>
+          </button>
+
+          <button class="icon-btn menu-btn" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="打开菜单">
+             <span class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+             </span>
+          </button>
+        </div>
+
+        <nav class="nav" id="primary-nav" aria-label="主导航">
+          <a href="./resume.html">简历</a>
+          <a href="#projects">作品</a>
+          <a href="#skills">技能</a>
+          <a href="#blog">文章</a>
+          <a href="#contact">联系</a>
+          <a class="nav-cta" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content fade-in-up">
+            <div class="chip-label">Available for hire</div>
+            <h1 class="hero-title" id="hero-title">
+              构建<span class="text-gradient">高性能</span>且<br>
+              <span class="text-gradient">令人愉悦</span>的数字体验
+            </h1>
+            <p class="hero-lead">
+              我是 AMianSleepy，一名全栈开发者。专注于打造极致的用户界面与稳健的后端服务。
+              现有站点基于纯 HTML/CSS/TS 构建，保持轻量，随时准备接入 ASP.NET Core。
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary glow" href="#projects">浏览作品</a>
+              <a class="btn ghost" href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html">
+                <span>实验室：炫酷仪表盘</span>
+              </a>
+            </div>
+
+            <dl class="hero-stats">
+              <div>
+                <dt>TypeScript</dt>
+                <dd>Interactive</dd>
+              </div>
+              <div class="sep"></div>
+              <div>
+                <dt>.NET 8</dt>
+                <dd>Ready</dd>
+              </div>
+              <div class="sep"></div>
+              <div>
+                <dt>Performance</dt>
+                <dd>Optimized</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="hero-visual fade-in-up delay-1">
+             <div class="glass-card">
+               <div class="card-glow"></div>
+               <div class="card-inner">
+                 <div class="code-preview">
+                   <div class="code-header">
+                     <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                   </div>
+                   <pre><code><span class="k">interface</span> <span class="t">Developer</span> {
+  <span class="p">name</span>: <span class="s">"AMianSleepy"</span>;
+  <span class="p">stack</span>: [<span class="s">"React"</span>, <span class="s">".NET"</span>, <span class="s">"Vue"</span>];
+  <span class="p">passion</span>: <span class="k">true</span>;
+}
+
+<span class="k">const</span> <span class="f">createValue</span> = () => {
+   <span class="k">return</span> <span class="k">new</span> <span class="t">Future</span>();
+};</code></pre>
+                 </div>
+                 <div class="card-badge">
+                   <span class="avatar-ph">AS</span>
+                   <div>
+                      <b>AMianSleepy</b>
+                      <small>Full Stack Dev</small>
+                   </div>
+                 </div>
+               </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 旅程展示区 (Journey Teaser) -->
+    <section class="section-journey fade-in-up delay-2">
+      <div class="container">
+        <div class="journey-card">
+          <div class="journey-visual" id="journey-visual">
+             <iframe 
+                id="journey-frame"
+                src="./csharp-journey.html" 
+                title="C# Journey Animation"
+                loading="lazy"
+                scrolling="no">
+             </iframe>
+             <div class="visual-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 自动播放脚本 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const frame = document.getElementById('journey-frame');
+        const visualContainer = document.getElementById('journey-visual');
+        let hasPlayed = false;
+        
+        const sendMessage = (action) => {
+          if (frame && frame.contentWindow) {
+            frame.contentWindow.postMessage(action, '*');
+          }
+        };
+
+        // 使用 IntersectionObserver 监听元素是否进入视图
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!visualContainer) return;
+            const isVisible = entry.intersectionRatio >= 0.5;
+            if (isVisible) {
+              setTimeout(() => {
+                if (!hasPlayed) {
+                  sendMessage('play');
+                  hasPlayed = true;
+                } else {
+                  sendMessage('resume');
+                }
+                visualContainer.classList.add('playing');
+              }, 200);
+            } else if (hasPlayed) {
+              sendMessage('pause');
+              visualContainer.classList.remove('playing');
+            }
+          });
+        }, {
+          threshold: 0.5 // 至少 50% 可见时触发
+        });
+
+        if (visualContainer) {
+          observer.observe(visualContainer);
+        }
+      });
+    </script>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" id="projects-title">精选作品</h2>
+          <p class="section-desc">将设计与工程结合，创造有价值的工具。</p>
+        </div>
+
+        <div class="grid projects-grid">
+          <article class="project-card reveal delay-1">
+            <div class="project-media gradient-1">
+              <div class="project-icon">🎨</div>
+            </div>
+            <div class="project-body">
+              <h3 class="card-title"><a href="./%E7%82%AB%E9%85%B7%E4%BB%AA%E8%A1%A8%E7%9B%98.html" class="full-link">炫酷仪表盘 UI</a></h3>
+              <p class="card-desc">探索玻璃拟态与复杂数据可视化的前端实现。纯 CSS 动效，无 JS 库依赖。</p>
+              <div class="tag-row">
+                <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Animation</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-media gradient-2">
+               <div class="project-icon">⚡</div>
+            </div>
+            <div class="project-body">
+              <h3 class="card-title">个人站点架构</h3>
+              <p class="card-desc">当前站点源码。展示了如何用原生 Web 技术构建现代化、高性能的静态页面。</p>
+              <div class="tag-row">
+                <span class="tag">TypeScript</span><span class="tag">Semantics</span><span class="tag">A11y</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-3">
+            <div class="project-media gradient-3">
+               <div class="project-icon">🛠️</div>
+            </div>
+            <div class="project-body">
+              <h3 class="card-title">Minimal API 模板</h3>
+              <p class="card-desc">为后端准备的 ASP.NET Core 9.0 快速启动模板，集成 OpenAPI 与 JWT。</p>
+              <div class="tag-row">
+                <span class="tag">C#</span><span class="tag">.NET 9</span><span class="tag">Backend</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-title" id="skills-title">技术栈</h2>
+          <p class="section-desc">全栈开发能力，保持对新技术的敏锐度。</p>
+        </div>
+
+        <div class="skills-layout">
+          <article class="panel reveal delay-1">
+            <div class="panel-head">
+               <div class="icon-box">💻</div>
+               <h3 class="panel-title">前端工程</h3>
+            </div>
+            <div class="chip-container">
+              <span class="chip">TypeScript</span>
+              <span class="chip">React</span>
+              <span class="chip">Vue.js</span>
+              <span class="chip">Tailwind CSS</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Vite</span>
+              <span class="chip">Three.js</span>
+            </div>
+          </article>
+
+          <article class="panel reveal delay-2">
+            <div class="panel-head">
+               <div class="icon-box">⚙️</div>
+               <h3 class="panel-title">后端服务</h3>
+            </div>
+            <div class="chip-container">
+              <span class="chip">C# / .NET Core</span>
+              <span class="chip">ASP.NET WebAPI</span>
+              <span class="chip">Entity Framework</span>
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">Redis</span>
+              <span class="chip">Docker</span>
+              <span class="chip">RabbitMQ</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="blog" aria-labelledby="blog-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="blog-title">博客 / 文章</h2>
+          <p class="section-desc">先放占位卡片，后续可接入 Markdown 或 API 列表。</p>
+        </div>
+
+        <div class="grid cards">
+          <article class="card">
+            <h3 class="card-title">渐进增强：从静态到 API 驱动</h3>
+            <p class="card-desc">如何引入后端而不推翻前端结构。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 架构</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">无框架组件化：用 TS 组织 UI</h3>
+            <p class="card-desc">原生模块、明确边界、易维护。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 前端</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">性能清单：从第一天开始</h3>
+            <p class="card-desc">少依赖、少阻塞、可访问性与 SEO。</p>
+            <p class="card-meta"><time datetime="2026-01-16">2026-01-16</time> · 性能</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title" id="contact-title">联系表单</h2>
+          <p class="section-desc">默认静态；若后端可用将自动 POST 到 API。</p>
+        </div>
+
+        <div class="contact">
+          <form class="contact-form" data-contact-form>
+            <div class="field">
+              <label for="name">称呼</label>
+              <input id="name" name="name" autocomplete="name" required maxlength="60" />
+            </div>
+            <div class="field">
+              <label for="email">邮箱</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="message">内容</label>
+              <textarea id="message" name="message" rows="5" required maxlength="1200"></textarea>
+            </div>
+
+            <div class="form-row">
+              <button class="btn primary" type="submit">发送</button>
+              <a class="btn" href="mailto:ShiYi@amiansleepy.me">邮件联系</a>
+              <p class="form-hint" data-form-hint aria-live="polite"></p>
+            </div>
+          </form>
+
+          <aside class="contact-aside" aria-label="联系方式">
+            <div class="panel">
+              <h3 class="panel-title">快速链接</h3>
+              <ul class="list">
+                <li><a class="link" href="https://github.com/AMianSleepy" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li><a class="link" href="#projects">作品集</a></li>
+                <li><a class="link" href="#blog">文章</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="muted">© <span data-year></span> AMianSleepy. Built with HTML/CSS/TypeScript.</p>
+        <a class="link" href="#top">回到顶部</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
