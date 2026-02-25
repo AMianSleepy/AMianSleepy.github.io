@@ -1,0 +1,10 @@
+title: "AMianSleepy"
+description: "Blog"
+markdown: kramdown
+timezone: Asia/Shanghai
+
+# 如果你使用了自定义域名（仓库里有 CNAME 通常是），一般保持空：
+baseurl: ""
+
+# 文章链接形式（可随时改）
+permalink: /blog/:year/:month/:day/:title/
